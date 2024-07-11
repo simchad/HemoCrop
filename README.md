@@ -17,6 +17,9 @@ Align(Rotation & Crop) the image, see below
 ### 경북대학교 대학원정책실 주관
 - KNU 대학원생 융복합연구공동체(2022학년도 2학기) 최우수상 수상
 - Rewarded 1,500,000 KRW
+- [Youtube Video Link][Ext1]
 
 ## Citation
 Updates soon.
+
+[Ext1]:https://www.youtube.com/live/WCEYZ2MnqMQ?si=DPl2egBpWaAHUCdS&t=3559
