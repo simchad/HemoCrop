@@ -1,7 +1,9 @@
 # HemoCrop
-CV to recognize hemocytometer grid further count cells within grid-line (100x scale)
+CV to recognize hemocytometer grid further count cells within grid-line (100x scale).
 
-Very simple algorithm to croping grid of chamber
+Very simple algorithm could crop grid of chamber.
+
+All of hemocytometer pictures are use freely.
 
 ## Scope
 ![hemo_grid](./img_hemo/20221008_image007.jpg)
