@@ -41,7 +41,8 @@ import matplotlib.pyplot as plt
 
 
 # Get current login user name & change directory to home.
-HOMEDIR = "C:/Users/"+os.getlogin()+"/Documents/autocellcounter/"
+#HOMEDIR = "C:/Users/"+os.getlogin()+"/Documents/autocellcounter/"
+HOMEDIR = "C:/Users/"+os.getlogin()+"/Documents/GitHub/HemoCrop/"
 os.chdir(HOMEDIR)
 
 # -----------------------------------------------------------------------
@@ -431,8 +432,9 @@ def CropImage(img=None, coordinates=None):
 
 
 if __name__ == "__main__":
-    HOMEDIR = "C:/Users/"+os.getlogin()+"/Documents/autocellcounter/"
-    PATH = HOMEDIR+"img_jpg/"
+    CWD = os.getcwd()
+    PATH = os.path.join(CWD, 'img_jpg')
+    path_valid = os.path.join(CWD, 'validation/process_log.csv')
     file_list = os.listdir(PATH)
     file_log = []
     rst_success = 0
@@ -441,7 +443,7 @@ if __name__ == "__main__":
     for i, file in enumerate(file_list):
         # enumerate exception how ignore?
         # Few images can not work: file_list[:20]
-        img = cv2.imread(PATH+file, cv2.IMREAD_COLOR)
+        img = cv2.imread(os.path.join(PATH,file), cv2.IMREAD_COLOR)
         rst = "Grid_"+str(i)+"_%s.jpg"%re.sub(r"\.[a-z]*","",file)
         PATH_GRID =HOMEDIR+"img_output/"+rst
 
@@ -454,7 +456,7 @@ if __name__ == "__main__":
             img_current = AlignImage(img, img_hough[0])
 
             # (2) Grid crop
-            img_L1 = nth_gaussian_blur(img_current[0], 7, 1)
+            img_L1 = nth_gaussian_blur(img_current[0], 7, 1) #7
             img_L2 = cv2.cvtColor(img_L1, cv2.COLOR_RGB2GRAY)
             img_edge = cv2.Canny(img_L2, 5, 10)
             img_tmp = houghline_coord(img_current[0], img_edge, theta=90)
@@ -468,7 +470,7 @@ if __name__ == "__main__":
             rst_failed += 1
 
     file_log = pd.DataFrame(file_log, columns=['Input image', 'Proceed', 'Output image'])
-    file_log.to_csv(path_or_buf=HOMEDIR+'validation/process_log.csv', sep=',', encoding='utf-8')
+    file_log.to_csv(path_or_buf=path_valid, sep=',', encoding='utf-8')
 
     with open("process_log.txt", "w") as output:
         output.write(str(file_log))
@@ -483,4 +485,9 @@ if __name__ == "__main__":
     # -> solution: grid line 앞뒤로 line 들어있는지 확인하면 됨. pixel이 4짜리가 들어있는지.
     # -> 들어있지않다면, inline으로 판단하고 +-4px.
     # 2023-04-15: high-resolution 작동안하는 문제.
+    #
+    # 2025-08-29
     # HOMEDIR have to change join though.
+    # 주기능 정상 작동. 
+    # Report: In total 206 files processed, 180 files succeed, and 26 files truncated...! error rate (12.6%)
+    # Process 180개 중, 7개 심각한 문제 3.8% (7/180)
