@@ -19,6 +19,11 @@ Align(Rotation & Crop) the image, see below
 - Rewarded 1,500,000 KRW
 - [Youtube Video Link][Ext1]
 
+## Result (Error rate)
+### 2023.4.11 - 1.4% (2/143)
+### 2025.8.29 - 19.9% (206 Processed, 26 truncated, 15 심각한 오류)
+
+
 ## Citation
 Updates soon.
 
